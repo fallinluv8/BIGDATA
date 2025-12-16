@@ -1,0 +1,30 @@
+# ===========================
+# 1. BỎ QUA DỮ LIỆU LỚN 
+# ===========================
+# Bỏ qua toàn bộ thư mục data chứa ảnh và parquet
+data/
+spark-warehouse/
+metastore_db/
+*.parquet
+*.log
+
+# ===========================
+# 2. BỎ QUA CẤU HÌNH DOCKER 
+# ===========================
+docker-compose.yml
+Dockerfile*
+spark/
+
+# ===========================
+# 3. BỎ QUA FILE RÁC PYTHON & IDE
+# ===========================
+__pycache__/
+*.pyc
+*.pyo
+.vscode/
+.idea/
+.DS_Store
+
+
+!src/result/
+!src/result/*.csv
