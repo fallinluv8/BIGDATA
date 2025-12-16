@@ -97,5 +97,5 @@ def show_page(data_dir: str):
         else:
             st.text_area("OCR text", value=text, height=350)
 
-        st.markdown("### ✂️ Tóm tắt nhanh")
+        st.markdown("###  Tóm tắt nhanh")
         st.write(summarize_text(text))

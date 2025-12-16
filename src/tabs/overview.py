@@ -65,7 +65,7 @@ def show_page(data_dir: str):
             plt.ylabel("Rows")
             st.pyplot(fig, clear_figure=True)
 
-            st.caption("Gợi ý: Nếu Error nhiều → fix protobuf/transformers trên worker/spark-client.")
+            
 
     st.markdown("---")
 
@@ -73,17 +73,4 @@ def show_page(data_dir: str):
     st.subheader(" Metrics table (preview)")
     st.dataframe(df_metrics.head(50), use_container_width=True)
 
-    with st.expander(" Quick sanity checks", expanded=False):
-        st.write(" Kiểm tra join keys (query_id, doc_id) có khớp không:")
-
-        missing_query_ids = 0
-        if "query_id" in df_results.columns and "query_id" in df_queries.columns:
-            qset = set(df_queries["query_id"].astype(str))
-            missing_query_ids = (~df_results["query_id"].astype(str).isin(qset)).sum()
-        st.write(f"- Results có query_id không tồn tại trong Queries: **{missing_query_ids}**")
-
-        missing_doc_ids = 0
-        if "doc_id" in df_results.columns and "doc_id" in df_ocr.columns:
-            dset = set(df_ocr["doc_id"].astype(str))
-            missing_doc_ids = (~df_results["doc_id"].astype(str).isin(dset)).sum()
-        st.write(f"- Results có doc_id không tồn tại trong OCR: **{missing_doc_ids}**")
+   

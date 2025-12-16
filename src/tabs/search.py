@@ -65,12 +65,11 @@ def show_page(data_dir: str):
     left, right = st.columns([1.2, 1])
 
     with left:
-        st.markdown("### 🧾 Query")
+        st.markdown("###  Query")
         st.write(f"**ID:** `{query_id}`")
         st.write(f"**Text:** {query_text}")
 
-        if metric_val is not None:
-            st.metric("Precision@10 (nếu có)", f"{float(metric_val):.4f}")
+        
 
         st.markdown("###  Top results")
         st.dataframe(df_r, use_container_width=True, height=350)
