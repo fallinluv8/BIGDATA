@@ -1,0 +1,101 @@
+query_id,query_text
+query-test-0,In which year were the Kefauver-Harris Amendments passed to make randomized controlled trials the standard for evaluating clinical efficacy?
+query-test-3,effect of modifications to the FDA's 503B bulk substances list on availability of compounded medications for patients
+query-test-9,What distinguishes the approaches of proactive risk assessment during drug development from postmarket surveillance in mitigating medication errors?
+query-test-15,patterns in SEND usage growth for investigational new drug applications from 2017 to 2019
+query-test-17,"According to FDA guidelines, what is the required format for displaying the strength of a small volume parenteral drug on its label?"
+query-test-18,Determine the FDA team tasked with detecting frequent SEND data problems and assisting reviewers in effectively utilizing the datasets.
+query-test-27,"What are the FDA's key initiatives introduced between 2009 and 2018 to address medication errors and opioid-related public health challenges, and what specific measures do they include?"
+query-test-32,List the specialized therapeutic offices within the Office of Regulatory Operations and describe the shared pharmacology and toxicology support structure
+query-test-36,What factors contribute to the fragility of the pharmaceutical supply chain for sterile injectable drugs in the United States?
+query-test-37,Identify the main elements of the REMS program and explain how each contributes to maintaining medication safety
+query-test-38,U.S. regulatory data protection duration for biologics
+query-test-44,Identify the number of New Molecular Entities approved by CDER in fiscal year 2019 that received priority review.
+query-test-47,What impact did the 21st Century Cures Act have on the FDA's post-market drug safety surveillance practices in 2017?
+query-test-51,What percentage of drug approvals in 2020 were for orphan drugs?
+query-test-54,"How could Mass Drug Administration in the Greater Mekong Subregion potentially contribute to the development of drug resistance, even though it aims to eliminate malaria?"
+query-test-56,Summarize the key strategies the FDA implemented to balance rapid treatment access with public safety during the pandemic.
+query-test-58,Explain how the integration of the Sentinel Initiative and IMEDS program contributes to improved post-market drug safety monitoring.
+query-test-59,trends in opioid crisis prescription and synthetic drug overdose fatalities
+query-test-62,contrasting clinical investigator and IRB compliance trends in FDA warning letters 2014-2017
+query-test-64,Are all prescription drugs required to have a unique product identifier under the DSCSA regulations effective in 2023?
+query-test-65,What role did the Sekine et al. analysis play in shaping the shift from the FDAAA 2007 requirements to the provisions of the 21st Century Cures Act?
+query-test-66,Compare the requirements for StudyName attribute in define.xml with the sponsor's study identifier in eCTD Module 4 folder structure for FDA submissions.
+query-test-70,pharmaceutical manufacturing innovation regulatory efforts 2017
+query-test-74,FDA regulatory framework for biosimilar and interchangeable biological products
+query-test-78,Explain how the hierarchical pyramid model supports the FDA's biosimilar approval process.
+query-test-81,opioid crisis trends synthetic vs prescription opioids 2000 to 2022
+query-test-82,List the common data quality issues in nonclinical submissions using CDISC-SEND standards that affect regulatory review and data analysis
+query-test-84,FDA Sentinel Initiative signal detection methods limitations
+query-test-85,How might regulatory changes under PDUFA VI impact the efficiency of drug development programs in the pharmaceutical industry?
+query-test-91,Explain how interdisciplinary collaboration contributes to regulatory consistency in drug approval processes.
+query-test-92,Is quality control the primary factor behind most U.S. drug shortages between 2013 and 2017 according to the data?
+query-test-97,Compare general SEND requirements with Technical Rejection Criteria standards for nonclinical submissions
+query-test-102,"How do submission patterns of ANDAs in 2017 compare to regulatory actions in 2018, and what does this reveal about the FDA review timeline?"
+query-test-111,In what ways could the existing healthcare payment system play a role in the rise of opioid misuse across the United States?
+query-test-112,What steps does the FDA take to ensure the safe development and regulation of opioid medications while promoting innovative pain treatments?
+query-test-116,Explain the symbolism of the three interlocking arrows in FDA's regulatory framework
+query-test-119,CDER and CBER drug shortage prevention contributions
+query-test-123,Did the FDA's 2018 Strategic Policy Roadmap eliminate the need for clinical trials in biosimilar approval processes?
+query-test-127,"How did the U.S. perform relative to the EU and Japan in the launch of new active substances between 2005 and 2018, and what patterns emerge regarding their positions in the global drug market?"
+query-test-131,Explain the implications of the FDA's Quality Management Maturity program for pharmaceutical manufacturing practices.
+query-test-136,Are there CRISPR-related patents permitted in the United States for human germline editing that would be denied in Europe due to ethical concerns?
+query-test-138,How do Bayesian hierarchical models improve the precision of intervals in subgroup analysis compared to traditional methods?
+query-test-143,"What determines whether SEND compliance is necessary for nonclinical study submissions, and how do these determinants shape the approach to submitting study data?"
+query-test-145,FDA approach to evaluating excipient safety through bridging justifications
+query-test-151,What considerations could affect the FDA's decision when assessing bulk drug substances for placement on the 503B eligibility list?
+query-test-154,"Describe the FDA's approach to promoting biosimilar development and improving regulatory effectiveness, highlighting major programs and partnerships"
+query-test-157,What approaches did CDER take to maintain a balance between advancing innovation and ensuring safety in drug regulation during 2017-2018?
+query-test-166,Analyze how the patterns of overdose fatalities linked to synthetic opioids and heroin differed from 2010 to 2017.
+query-test-169,"List the key policies outlined for outsourcing facilities, including their associated regulations and guidance documents."
+query-test-170,Describe the ways in which Bayesian hierarchical models enhance the dependability of subgroup evaluations in clinical trials when contrasted with conventional approaches.
+query-test-173,Does the FDA's 351(k) pathway require Phase III pivotal trial evidence for biosimilar approval?
+query-test-174,Calculate the total number of countries that conducted or completed HIV drug resistance surveys or reported data according to the 2017 WHO report.
+query-test-176,"Analyze how the FDA's Moral Imperatives balance regulatory oversight with medical innovation, considering their historical context and ethical implications."
+query-test-178,Compare the ethical challenges of antimicrobial resistance and climate change in terms of public awareness and individual moral responsibility.
+query-test-186,"How is the FDA using RWD to study the safety and use of CBD, and what are the limitations of this approach?"
+query-test-188,What are the responsibilities managed by the Office of Generic Drugs of the FDA?
+query-test-189,Explain how the FDA's Office of Generic Drugs used workshops for advancing generic drug products.
+query-test-192,What are the approved expedited programs from 2008 to 2016 by CDER for NME?
+query-test-193,Summarize the steps involved in error reporting in ISMP's MERP.
+query-test-197,Explain how did the FDA's refuse to receive percentage in FY 16 compare to FY 15.
+query-test-198,What is a real-life example of the FDA's effort to expand pain treatment alternatives?
+query-test-201,CDER's multifaceted approach during pandemic.
+query-test-208,Is there a rise in CDER NME submissions from 2007 to 2008?
+query-test-220,State the list of core principles of the FDA’s Framework for Benefit-Risk Counseling with REMS.
+query-test-223,What is the difference in the expiry dates in months between Trizivir and Abacavir Sulfate?
+query-test-225,What key industry groups were part of the proposed GDUFA II agreement with the FDA?
+query-test-227,What is the percentage difference of CDER NME/BLA rare targeted therapies and CDER NME/BLA common targeted therapies during 1990-1992?
+query-test-228,Does 'unit-of-use packaging' improve opioid analgesic safety?
+query-test-233,Which act forms the basis of the biosimilar pathway?
+query-test-235,"Does EBP combine clinical expertise, research evidence, and patient preferences to support informed, individualized care decisions?"
+query-test-240,What are the six active initiatives under the FDA’s New Drugs Regulatory Program?
+query-test-241,Is it correct that the MERP by ISMP allows users to upload the image of the product while filing the report?
+query-test-243,What kind of consumer research is the FDA conducting for naloxone’s OTC transition?
+query-test-244,What are three challenges faced by the pharma industry that were identified by the Center for Drug Evaluation and Research of FDA during the COVID-19 pandemic?
+query-test-257,Explain how the FDA is modernizing drug development and manufacturing.
+query-test-269,What is the percentage difference of non-rare approvals and rare approvals in the traditional development program?
+query-test-271,What are the four responsibilities of the generic drug industry in its partnership model with the FDA?
+query-test-275,Can real-world evidence improve inclusivity in clinical trials?
+query-test-282,What is the implication of using only data from the interested subgroup for treatment effect estimation?
+query-test-283,What is the purpose of the simplified ts.xpt file?
+query-test-289,Summarize the efforts taken by the FDA to make compounded drugs accessible to a wider range of patients.
+query-test-293,Were warning letters sent out by the FDA to Institutional Review Boards under the bioresearch monitoring program in the 2017 fiscal year?
+query-test-308,Identify the number of synthetic opioid overdose deaths in August 2019.
+query-test-310,Which law was created due to the sulfanilamide incident?
+query-test-311,Is there a risk of transmitting drug-resistant organisms to a newborn through close contact with an MDRO-positive caregiver?
+query-test-313,What is the difference between the number of formal meeting requests in the year 2018 and 2010?
+query-test-314,What is the filing category that aligns with the USP of excipient identification removal Test C testing?
+query-test-320,Summarize the benefits of the FDA's REMS program and why it was needed.
+query-test-321,Describe the difference between L1 and L2 subgroup analysis perspective/frameworks.
+query-test-326,What is the difference in the highest number of ANDAs received by FDA in a fiscal year before and after the introduction of GDUFA?
+query-test-331,Was competition law in TRIPS initially associated with technology transfer?
+query-test-335,How many patients receive high-impact chronic pain opioid prescriptions?
+query-test-336,What percent of the drugs approved in 2018 are orphan drugs?
+query-test-2055,Describe the Practices for Pharmacovigilance under the FDAAA 2007.
+query-test-2059,"Discuss the unique points of opposition for Ritonavir, Lopinavir, and Atazanavir Sulphate. "
+query-test-2064,"Enumerate the three focus areas for Bringing Therapies to Underserved Populations, and analyze the percentage of Rare Targeted Therapies in 1990-1992."
+query-test-2068,"What are the levels in Active Risk Identification and Analysis, and how does ARIA system link to the requirement to consider its sufficiency before PMR?"
+query-test-2071,"List down the objectives of the New Drugs Regulatory Program Modernization, and the Clinical Offices and Division Names."
+query-test-2072,Discuss the utilization of oncological drugs across different expedited programs and the growth potential of novel endpoints in oncology.
+query-test-2073,"What two specific failures cited for the EpiPen facility led to its violative status, and what is Firm B's Warning Letter number and date regarding adulterated drugs?"

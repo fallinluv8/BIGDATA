@@ -1,251 +1,237 @@
 doc_id,text_ocr
-corpus-test-54,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-34,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-108,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-120,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-259,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-10,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-46,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-188,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-57,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-265,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-99,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-304,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-13,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-280,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-287,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-30,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-154,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-84,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-211,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-152,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-166,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-56,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-5,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-121,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-101,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-112,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-189,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-132,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-196,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-291,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-124,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-148,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-239,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-184,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-153,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-301,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-264,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-234,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1268,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1441,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1249,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1330,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1196,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1309,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1371,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1213,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1283,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1210,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1227,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
-corpus-test-1359,"Error_Load_Model: Couldn't instantiate the backend tokenizer from one of: 
-(1) a `tokenizers` library serialization file, 
-(2) a slow tokenizer instance to convert or 
-(3) an equivalent slow tokenizer class to instantiate and convert. 
-You need to have sentencepiece installed to convert a slow tokenizer to a fast one."
+corpus-test-275,8
+corpus-test-143,REFIER
+corpus-test-233,PROMOED
+corpus-test-140,F FS
+corpus-test-1341,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1257,PERFORATED SATINTAINING
+corpus-test-1348,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1190,SUBJECT:
+corpus-test-1808,AMOUNT
+corpus-test-1764,RECEIPT
+corpus-test-1823,-SPEMENTS:
+corpus-test-1887,RT
+corpus-test-1525,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1766,ISS
+corpus-test-1578,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+corpus-test-1996,REF
+corpus-test-2213,RT
+corpus-test-2239,REF
+corpus-test-2200,IC
+corpus-test-2269,(S) : SOLD : 000000011 *000000 : **** ***
+corpus-test-2251,TRANSACTION
+corpus-test-764,- -
+corpus-test-831,8
+corpus-test-821,F @
+corpus-test-725,0.00
+corpus-test-453,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-763,H
+corpus-test-684,: SSSPICE: 55000
+corpus-test-1004,REG
+corpus-test-959,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+corpus-test-1063,QTY
+corpus-test-1112,R
+corpus-test-1097,CHANGE
+corpus-test-993,R
+corpus-test-1138,=================================================================================================================================
+corpus-test-989,---------
+corpus-test-357,SEE BACK OF RECEIPT FOR AN OFFER
+corpus-test-729,REFIED
+corpus-test-706,SAMPLE BAKE PROGRAM POST COPY
+corpus-test-549,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-795,1 CARD: 1/25/25/2000 AMOUNT FOR AN OFFER FOR DETAILS. FREE SANDWICH.
+corpus-test-373,CASHIER:
+corpus-test-623,COUNT
+corpus-test-1009,555
+corpus-test-951,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+corpus-test-995,TAX:
+corpus-test-1082,R
+corpus-test-1053,55
+corpus-test-1035,TABLE:
+corpus-test-1016,AMOUNT
+corpus-test-2130,-COPPING
+corpus-test-2090,REFICE:
+corpus-test-2259,8
+corpus-test-2265,TAX:
+corpus-test-1890,E
+corpus-test-2026,---------
+corpus-test-1835,OFI
+corpus-test-1824,%
+corpus-test-1851,5MM
+corpus-test-1893,QTY
+corpus-test-120,ADJUSTMENT
+corpus-test-46,POSTING RECEIPT: USUAL
+corpus-test-57,C
+corpus-test-152,---------
+corpus-test-121,REGION
+corpus-test-132,TAX &
+corpus-test-264,O.S.
+corpus-test-1412,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1157,EXCLUS OF SMOKING PROPERCEMENT
+corpus-test-1289,TSCO
+corpus-test-236,TOTAL
+corpus-test-204,SEE BACK OF RECEIPT FOR AN OFFER FOR DETAILS.
+corpus-test-86,SRFFELL
+corpus-test-261,REFIER
+corpus-test-180,=================================================================================================================================
+corpus-test-267,C
+corpus-test-1258,IPT
+corpus-test-1398,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1342,-35-SIZE-SIZE-SIZE-SQUAPPING RECEIPT FOR AN OFFER
+corpus-test-1443,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1761,SEE BACK OF RECEIPT FOR AN OFFER
+corpus-test-1991,PERFORATED
+corpus-test-1898,0.00
+corpus-test-1982,=================================================================================================================================
+corpus-test-1768,QTR
+corpus-test-1866,TAX
+corpus-test-1960,REF
+corpus-test-1714,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-1974,IC
+corpus-test-1906,TAX:
+corpus-test-2246,GST
+corpus-test-2129,$500
+corpus-test-2209,MARICH
+corpus-test-2164,---------
+corpus-test-2182,=================================================================================================================================
+corpus-test-2282,PERMANACULINE CHAINTS
+corpus-test-1123,WEASE-SEXPRESS BY
+corpus-test-979,TABLE:
+corpus-test-1002,=================================================================================================================================
+corpus-test-378,AMT-PAP
+corpus-test-731,REF
+corpus-test-852,:000000000000000000
+corpus-test-784,CASH
+corpus-test-702,PERFORATED SALES
+corpus-test-777,AX
+corpus-test-882,AMT
+corpus-test-665,TOTAL
+corpus-test-269,RT
+corpus-test-4,0.3 @
+corpus-test-303,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-229,AMOUNT
+corpus-test-205,REF
+corpus-test-215,REFIER
+corpus-test-201,TOTAL
+corpus-test-1269,TOTAL
+corpus-test-1187,TAX:
+corpus-test-1222,CASHIER:
+corpus-test-1206,TOTAL
+corpus-test-1212,CHANGE:
+corpus-test-1902,=================================================================================================================================
+corpus-test-1942,TAX:
+corpus-test-1521,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-2067,TAX FFFEL
+corpus-test-1988,REF
+corpus-test-2150,(SPEC
+corpus-test-2277,TAX:
+corpus-test-2258,F-O
+corpus-test-2204,TAX:
+corpus-test-2278,O.S.
+corpus-test-2083,QUESTIONS
+corpus-test-2247,TOTAL
+corpus-test-2159,555
+corpus-test-931,0.00
+corpus-test-1108,TAX
+corpus-test-1005,AMOUNT
+corpus-test-1127,QTY
+corpus-test-1050,TOTAL
+corpus-test-956,=================================================================================================================================
+corpus-test-893,Q=
+corpus-test-771,TOTAL AMOUNTS
+corpus-test-717,CHANGE DATE (SSUEST CONTAINERS)
+corpus-test-811,TOTAL
+corpus-test-607,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-496,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-664,TOTAL
+corpus-test-687,CHANGE
+corpus-test-798,FINAL AND RATE AND RECEIPTS:
+corpus-test-861,ON SANDWICH PROPERMINAL FOR AN OFFICE FOR RECEIPT FOR AN OFFER OF RECEIPT FOR AN OFFER FOR DETAILS.
+corpus-test-657,UP ON BACK OF RECEIPT FOR AN OFFICIENT FOR AN OFFER
+corpus-test-596,*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+corpus-test-841,---------
+corpus-test-710,0.00
+corpus-test-781,REGION
+corpus-test-699,GST
+corpus-test-833,3.50
+corpus-test-856,GST
+corpus-test-1006,GST
+corpus-test-1024,TRANSACTION: SUBJECT:
+corpus-test-2256,0.00
+corpus-test-2309,SEE AWAY ON
+corpus-test-2118,TC
+corpus-test-2268,PROJECTS REPRESENT FOR AN
+corpus-test-2165,CHANGE
+corpus-test-2097,3
+corpus-test-1721,TOTAL AMOUNT FOR AN OFFER FOR A FREE CASHIER.
+corpus-test-1920,SUBJECT
+corpus-test-2014,---------
+corpus-test-1796,8
+corpus-test-203,R
+corpus-test-170,TPMFT
+corpus-test-165,IC
+corpus-test-115,TOTAL TOTAL
+corpus-test-226,CASHTAIN WITHIN CARDS ON RECEIPT FOR AN OFFER
+corpus-test-135,=================================================================================================================================
+corpus-test-231,INVENTING
+corpus-test-224,TAX:
+corpus-test-1167,GST
+corpus-test-685,COUPON PERFORATED
+corpus-test-365,TOTAL COPY
+corpus-test-907,SEE BACK OF RECEIPT FOR AN OFFER
+corpus-test-671,TAX:
+corpus-test-870,0.00
+corpus-test-1008,AMOUNT
+corpus-test-916,5558885538
+corpus-test-1114,=================================================================================================================================
+corpus-test-1102,REFEST
+corpus-test-1111,TOTAL TRANSACTIONS:
+corpus-test-933,GST
+corpus-test-1290,SAMPLE
+corpus-test-1175,ON
+corpus-test-1275,C
+corpus-test-1273,CHANGE
+corpus-test-2085,SEM
+corpus-test-32,=================================================================================================================================
+corpus-test-77,SEP
+corpus-test-177,TAXED
+corpus-test-117,STATION:
+corpus-test-1944,DATE
+corpus-test-1941,R
+corpus-test-709,NOTE:
+corpus-test-732,QTY
+corpus-test-728,QTY
+corpus-test-557,FREE SANDWICH!
+corpus-test-708,CASHIER
+corpus-test-1069,TAR
+corpus-test-1151,ON
+corpus-test-1065,F
+corpus-test-1011,---------
+corpus-test-1889,R
+corpus-test-1580,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+corpus-test-2010,$500
+corpus-test-2065,GST:
+corpus-test-1762,$500
+corpus-test-2105,%
+corpus-test-2292,SAMPLE:
+corpus-test-2075,TABLE:
+corpus-test-2154,REG
+corpus-test-1288,GST
+corpus-test-1271,TABLE:
+corpus-test-1169,CHANGE CONVENSING
+corpus-test-1305,PERFORATED RECEIPT FOR AN OFFER
+corpus-test-255,REF
+corpus-test-194,Q.
+corpus-test-260,ON
+corpus-test-110,F PR
+corpus-test-1174,NO.---
+corpus-test-1901,TAX:
+corpus-test-1773,AMOUNT
+corpus-test-1896,QTY
+corpus-test-1950,NEARIER:
+corpus-test-2208,-SAMPLE PROMOED RECEIPT
+corpus-test-2181,R
+corpus-test-2249,-289-05-SEP-SEP-S-S-S-----------------------
+corpus-test-1101,=============
+corpus-test-823,R
+corpus-test-650,GST: *** ***

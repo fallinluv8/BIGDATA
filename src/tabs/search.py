@@ -1,84 +1,114 @@
-#src/tabs/search.py
+# src/tabs/search.py
 import streamlit as st
 import pandas as pd
-import os 
 
-def show_page():
-    st.header("Demo: Semantic Search System")
-    st.markdown("Mô phỏng quá trình tìm kiếm dựa trên ngữ nghĩa.")
-    
-    try:
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        path_results = os.path.join(current_dir, "../result/web_data_results.csv")
-        path_content = os.path.join(current_dir, "../result/web_data_ocr.csv")
-        
-        # Kiểm tra file
-        if not os.path.exists(path_results):
-            st.error(f"Thiếu file kết quả: {path_results}")
+from .utils import load_all, is_ocr_error, summarize_text
+
+def show_page(data_dir: str):
+    st.header("3) Demo Tìm kiếm (Retrieval)")
+
+    with st.spinner("Đang load dữ liệu..."):
+        df_queries, df_results, df_ocr, df_metrics = load_all(data_dir)
+
+    required = {"query_id", "doc_id"}
+    if not required.issubset(set(df_results.columns)):
+        st.error("web_data_results.csv phải có cột query_id và doc_id")
+        st.stop()
+
+    if not {"query_id", "query_text"}.issubset(set(df_queries.columns)):
+        st.error("web_data_queries.csv phải có cột query_id và query_text")
+        st.stop()
+
+    # ===== Controls =====
+    st.subheader(" Chọn query để tìm kiếm")
+    df_queries = df_queries.copy()
+    df_queries["label"] = df_queries["query_id"].astype(str) + " | " + df_queries["query_text"].astype(str)
+
+    # search/filter queries
+    q_filter = st.text_input("Lọc query theo keyword (optional):", "")
+    df_q_show = df_queries
+    if q_filter.strip():
+        df_q_show = df_q_show[df_q_show["query_text"].astype(str).str.contains(q_filter.strip(), case=False, na=False)]
+
+    if df_q_show.empty:
+        st.warning("Không có query nào khớp.")
+        return
+
+    selected = st.selectbox("Query:", df_q_show["label"].tolist())
+    query_id = selected.split(" | ")[0].strip()
+    query_text = " | ".join(selected.split(" | ")[1:]).strip()
+
+    topk = st.slider("Top-K hiển thị:", min_value=3, max_value=50, value=10, step=1)
+
+    # ===== Results for query =====
+    df_r = df_results[df_results["query_id"].astype(str) == str(query_id)].copy()
+    if df_r.empty:
+        st.warning("Query này không có kết quả retrieval.")
+        return
+
+    # sort
+    if "rank" in df_r.columns:
+        df_r = df_r.sort_values("rank")
+    elif "similarity" in df_r.columns:
+        df_r = df_r.sort_values("similarity", ascending=False)
+
+    df_r = df_r.head(topk)
+
+    # Merge metric if available
+    metric_val = None
+    if "query_id" in df_metrics.columns and "precision_at_10" in df_metrics.columns:
+        rowm = df_metrics[df_metrics["query_id"].astype(str) == str(query_id)].head(1)
+        if not rowm.empty:
+            metric_val = rowm.iloc[0]["precision_at_10"]
+
+    # ===== Layout =====
+    left, right = st.columns([1.2, 1])
+
+    with left:
+        st.markdown("###  Query")
+        st.write(f"**ID:** `{query_id}`")
+        st.write(f"**Text:** {query_text}")
+
+        if metric_val is not None:
+            st.metric("Precision@10 (nếu có)", f"{float(metric_val):.4f}")
+
+        st.markdown("###  Top results")
+        st.dataframe(df_r, use_container_width=True, height=350)
+
+        # Download results filtered for this query
+        csv_bytes = df_r.to_csv(index=False).encode("utf-8")
+        st.download_button(
+            "⬇ Download Top-K CSV (this query)",
+            data=csv_bytes,
+            file_name=f"topk_{query_id}.csv",
+            mime="text/csv"
+        )
+
+    with right:
+        st.markdown("###  Xem OCR của document")
+        doc_ids = df_r["doc_id"].astype(str).tolist()
+        doc_pick = st.selectbox("Chọn doc_id:", doc_ids)
+
+        # get OCR
+        if "doc_id" not in df_ocr.columns or "text_ocr" not in df_ocr.columns:
+            st.error("web_data_ocr.csv thiếu doc_id/text_ocr")
+            st.stop()
+
+        row = df_ocr[df_ocr["doc_id"].astype(str) == str(doc_pick)].head(1)
+        if row.empty:
+            st.warning("Không tìm thấy OCR cho doc này.")
             return
-            
-        # Đọc dữ liệu
-        df_results = pd.read_csv(path_results)
-        
-        df_content = pd.DataFrame()
-        if os.path.exists(path_content):
-            df_content = pd.read_csv(path_content)
-            # --- FIX LỖI QUAN TRỌNG: Chuẩn hóa ID để khớp dữ liệu (xóa khoảng trắng thừa) ---
-            if 'doc_id' in df_content.columns:
-                df_content['doc_id'] = df_content['doc_id'].astype(str).str.strip()
+
+        text = str(row.iloc[0]["text_ocr"])
+
+        if is_ocr_error(text):
+            st.error("OCR lỗi model/protobuf:")
+            st.code(text)
+        elif text.strip() == "":
+            st.warning("OCR rỗng.")
         else:
-             st.warning("Không tìm thấy file nội dung OCR. Kết quả sẽ chỉ hiện ID.")
+            st.success("OCR OK")
+            st.text_area("OCR text", value=text, height=330)
 
-        # Chuẩn hóa ID bảng kết quả
-        df_results['doc_id'] = df_results['doc_id'].astype(str).str.strip()
-
-        # --- XỬ LÝ DỮ LIỆU ---
-        unique_queries = df_results['query_id'].unique()
-        
-        st.divider()
-        st.subheader("1. Thử nghiệm Truy vấn")
-        
-        col_q1, col_q2 = st.columns([3, 1])
-        with col_q1:
-            # Nếu có cột 'query_text' trong file result thì dùng, không thì dùng ID
-            selected_query = st.selectbox("Chọn câu hỏi mẫu (Query ID):", unique_queries)
-        with col_q2:
-            st.write("") 
-            st.write("") 
-            btn_search = st.button("Tìm kiếm", type="primary", use_container_width=True)
-
-        if btn_search:
-            results = df_results[df_results['query_id'] == selected_query].sort_values(by='similarity', ascending=False).head(10)
-            
-            st.write(f"Kết quả tìm thấy cho: **'{selected_query}'**")
-            st.markdown("---")
-
-            for index, row in results.iterrows():
-                doc_id = row['doc_id']
-                score = row['similarity']
-                
-                # Biến chứa nội dung hiển thị
-                content_preview = "Nội dung không khả dụng (Kiểm tra lại mapping ID)"
-                header_text = doc_id # Mặc định tiêu đề là ID
-                
-                # Logic tìm nội dung text từ bảng OCR
-                if not df_content.empty and 'doc_id' in df_content.columns:
-                    text_col = next((c for c in ['text_ocr', 'text', 'content'] if c in df_content.columns), None)
-                    
-                    if text_col:
-                        matched_row = df_content[df_content['doc_id'] == doc_id]
-                        if not matched_row.empty:
-                            full_text = str(matched_row.iloc[0][text_col])
-                            # Lấy 300 ký tự làm preview
-                            content_preview = full_text[:300] + "..." if len(full_text) > 300 else full_text
-                            # Lấy 50 ký tự đầu làm tiêu đề thay cho ID
-                            header_text = f"[{score:.4f}] {full_text[:60]}..."
-
-                # --- GIAO DIỆN HIỂN THỊ ---
-                # Tiêu đề Expander giờ sẽ hiện một phần nội dung thay vì chỉ ID
-                with st.expander(header_text):
-                    st.markdown(f"**ID Tài liệu:** `{doc_id}` | **Độ tương đồng:** `{score:.4f}`")
-                    st.text_area("Nội dung chi tiết:", content_preview, height=100, key=f"txt_{doc_id}_{index}")
-
-    except Exception as e:
-        st.error(f"Đã xảy ra lỗi hệ thống: {e}")
+        st.markdown("####  Preview nhanh")
+        st.write(summarize_text(text))
