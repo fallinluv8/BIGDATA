@@ -3,84 +3,74 @@ import os
 import pandas as pd
 import streamlit as st
 
-REQUIRED_FILES = {
-    "queries": "web_data_queries.csv",
-    "results": "web_data_results.csv",
-    "ocr": "web_data_ocr.csv",
-    "metrics": "web_data_metrics.csv",
-}
+REQUIRED_FILES = [
+    "web_data_queries.csv",
+    "web_data_results.csv",
+    "web_data_ocr.csv",
+    "web_data_metrics.csv",
+]
 
 def get_data_dir() -> str:
     """
-    Xác định thư mục chứa CSV theo thứ tự ưu tiên:
-    1. ENV: DATA_DIR (deploy)
-    2. /app/src/result (Docker Spark)
-    3. ./data (local)
+    Cho phép user chọn folder data trong sidebar.
+    Ưu tiên:
+      1) /app/src/result (nếu đang chạy trong docker spark-client)
+      2) ./data
+    User có thể override bằng text_input.
     """
-    if "DATA_DIR" in os.environ:
-        base = os.environ["DATA_DIR"]
-    elif os.path.isdir("/app/src/result"):
-        base = "/app/src/result"
-    elif os.path.isdir("./data"):
-        base = "./data"
-    else:
-        base = "."
+    default_candidates = ["/app/src/result", "./data", "."]
+    default_dir = next((p for p in default_candidates if os.path.isdir(p)), "./data")
 
-    if "DATA_DIR_UI" not in st.session_state:
-        st.session_state.DATA_DIR_UI = base
+    # Lưu trong session để nhớ
+    if "data_dir" not in st.session_state:
+        st.session_state["data_dir"] = default_dir
 
-    data_dir = st.sidebar.text_input(
-        " Data directory (CSV):",
-        st.session_state.DATA_DIR_UI
-    ).strip()
-
-    st.session_state.DATA_DIR_UI = data_dir
+    data_dir = st.sidebar.text_input("Nhập đường dẫn thư mục chứa CSV:", st.session_state["data_dir"])
+    data_dir = data_dir.strip()
+    st.session_state["data_dir"] = data_dir
     return data_dir
-
-
-def csv_path(data_dir: str, key: str) -> str:
-    return os.path.join(data_dir, REQUIRED_FILES[key])
-
 
 def validate_required_files(data_dir: str):
     missing = []
-    for name in REQUIRED_FILES.values():
-        if not os.path.isfile(os.path.join(data_dir, name)):
-            missing.append(name)
-    return len(missing) == 0, missing
-
+    for f in REQUIRED_FILES:
+        path = os.path.join(data_dir, f)
+        if not os.path.isfile(path):
+            missing.append(f)
+    return (len(missing) == 0), missing
 
 @st.cache_data(show_spinner=False)
-def load_csv(data_dir: str, key: str) -> pd.DataFrame:
-    path = csv_path(data_dir, key)
-    return pd.read_csv(path)
+def load_csv(data_dir: str, filename: str) -> pd.DataFrame:
+    path = os.path.join(data_dir, filename)
+    df = pd.read_csv(path)
 
+    # Một số chuẩn hoá nhẹ để tránh lỗi kiểu dữ liệu
+    if filename == "web_data_results.csv":
+        # đảm bảo rank numeric
+        if "rank" in df.columns:
+            df["rank"] = pd.to_numeric(df["rank"], errors="coerce").fillna(0).astype(int)
+
+    return df
 
 @st.cache_data(show_spinner=False)
 def load_all(data_dir: str):
-    """
-    TRẢ VỀ ĐÚNG THỨ TỰ:
-    df_queries, df_results, df_ocr, df_metrics
-    """
-    return (
-        load_csv(data_dir, "queries"),
-        load_csv(data_dir, "results"),
-        load_csv(data_dir, "ocr"),
-        load_csv(data_dir, "metrics"),
-    )
+    df_queries = load_csv(data_dir, "web_data_queries.csv")
+    df_results = load_csv(data_dir, "web_data_results.csv")
+    df_ocr = load_csv(data_dir, "web_data_ocr.csv")
+    df_metrics = load_csv(data_dir, "web_data_metrics.csv")
+    return df_queries, df_results, df_ocr, df_metrics
 
+def safe_str(x):
+    try:
+        return "" if pd.isna(x) else str(x)
+    except Exception:
+        return ""
 
 def is_ocr_error(text: str) -> bool:
-    if not isinstance(text, str):
-        return False
-    return (
-        text.startswith("Error_Load_Model")
-        or "Descriptors cannot be created directly" in text
-    )
+    t = (text or "").strip()
+    return t.startswith("Error_Load_Model") or "Descriptors cannot be created directly" in t
 
-
-def summarize_text(text: str, max_len=300):
-    if not isinstance(text, str):
-        return ""
-    text = text.replace("\n", " ").strip()
-    return text if len(text) <= max_len else text[:max_len] + "..."
+def summarize_text(text: str, max_len: int = 350) -> str:
+    t = (text or "").strip().replace("\n", " ")
+    if len(t) <= max_len:
+        return t
+    return t[:max_len] + "…"
