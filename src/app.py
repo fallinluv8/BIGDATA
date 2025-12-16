@@ -2,6 +2,10 @@ import streamlit as st
 # Import các module từ thư mục tabs
 from tabs import overview, ocr, search
 
+import sys
+import streamlit as st
+
+st.write(sys.version)
 # 1. Cấu hình trang
 st.set_page_config(page_title="BigData Medical Report", layout="wide")
 
