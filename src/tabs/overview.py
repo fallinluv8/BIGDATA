@@ -1,14 +1,19 @@
+#src/tabs/overview.py
 import streamlit as st
 import pandas as pd
-import os  # 
+import os
 
 def show_page():
-    st.header(" Kết quả Đánh giá (Evaluation Metrics)")
+    st.header("Kết quả Đánh giá (Evaluation Metrics)")
     
     try:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(current_dir, "../result/web_data_metrics.csv")
         
+        if not os.path.exists(file_path):
+             st.error(f"Không tìm thấy file tại: {file_path}")
+             return
+
         df_metrics = pd.read_csv(file_path)
         # -------------------------------
         
@@ -24,7 +29,5 @@ def show_page():
         st.subheader("Bảng chi tiết độ chính xác từng câu hỏi")
         st.dataframe(df_metrics, use_container_width=True)
         
-    except FileNotFoundError:
-        st.error(f" Không tìm thấy file tại: {file_path}")
     except Exception as e:
         st.error(f"Lỗi: {e}")
