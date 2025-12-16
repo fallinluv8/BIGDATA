@@ -1,3 +1,4 @@
+#src/app.py
 import streamlit as st
 # Import các module từ thư mục tabs
 from tabs import overview, ocr, search

@@ -1,26 +1,28 @@
 import streamlit as st
 import pandas as pd
+import os # <--- Quan trọng
 
 def show_page():
     st.header(" Demo: Semantic Search System")
     st.markdown("Mô phỏng quá trình tìm kiếm dựa trên ngữ nghĩa.")
     
     try:
-        df_results = pd.read_csv("result/web_data_results.csv")
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(current_dir, "../result/web_data_results.csv")
         
-        # Lấy danh sách câu hỏi
+        df_results = pd.read_csv(file_path)
+        # -------------------------------
+        
         unique_queries = df_results['query_id'].unique()
         
         st.subheader(" Thử nghiệm Truy vấn")
         selected_query = st.selectbox("Chọn câu hỏi (Query):", unique_queries)
         
         if st.button("Tìm kiếm ngay", type="primary"):
-            # Lọc kết quả
             results = df_results[df_results['query_id'] == selected_query].sort_values(by='similarity', ascending=False).head(10)
             
             st.write(f"Kết quả cho: **'{selected_query}'**")
             
-            # Hiển thị bảng
             st.dataframe(
                 results[['doc_id', 'similarity']],
                 column_config={
@@ -37,4 +39,4 @@ def show_page():
             )
             
     except FileNotFoundError:
-        st.error(" Không tìm thấy file 'result/web_data_results.csv'.")
+        st.error(f" Không tìm thấy file tại: {file_path}")

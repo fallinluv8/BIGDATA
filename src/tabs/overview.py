@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
+import os  # 
 
 def show_page():
     st.header(" Kết quả Đánh giá (Evaluation Metrics)")
     
     try:
-        # Đọc file CSV từ thư mục result
-        df_metrics = pd.read_csv("result/web_data_metrics.csv")
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(current_dir, "../result/web_data_metrics.csv")
+        
+        df_metrics = pd.read_csv(file_path)
+        # -------------------------------
         
         # Tính toán
         avg_score = df_metrics["precision_at_10"].mean()
@@ -21,4 +25,6 @@ def show_page():
         st.dataframe(df_metrics, use_container_width=True)
         
     except FileNotFoundError:
-        st.error(" Không tìm thấy file 'result/web_data_metrics.csv'. Hãy chạy export data trước.")
+        st.error(f" Không tìm thấy file tại: {file_path}")
+    except Exception as e:
+        st.error(f"Lỗi: {e}")
