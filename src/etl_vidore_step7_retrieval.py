@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col, broadcast
 import pyspark.sql.functions as F
 from pyspark.sql.types import FloatType
 from pyspark.sql.window import Window
@@ -14,6 +14,7 @@ spark = SparkSession.builder \
     .config("spark.driver.host", "med-spark-client") \
     .getOrCreate()
 
+spark.sparkContext.setLogLevel("WARN")
 print("Step 7: Retrieval & Evaluation Started")
 
 # ==========================================
@@ -24,7 +25,7 @@ df_docs = spark.read.parquet(
 ).select(
     col("doc_id"),
     col("embedding").alias("doc_vec")
-)
+).cache()
 
 df_queries = spark.read.parquet(
     "hdfs:///bigdata/processed/vidore_query_embeddings"
@@ -39,7 +40,7 @@ df_qrels = spark.read.parquet(
     col("query-id").alias("query_id"),
     col("corpus-id").alias("doc_id"),
     col("score")
-)
+).filter(col("score") > 0)
 
 print(f"Loaded {df_docs.count()} docs, {df_queries.count()} queries")
 
@@ -51,7 +52,6 @@ df_queries_sample = df_queries.limit(100).cache()
 # ==========================================
 # 4. Brute-force Retrieval (Cosine Similarity)
 # ==========================================
-# Vì vector đã normalize ở Step 6 => cosine = dot product
 
 @F.udf(FloatType())
 def dot_product(v1, v2):
@@ -59,9 +59,14 @@ def dot_product(v1, v2):
         return 0.0
     return float(sum(a * b for a, b in zip(v1, v2)))
 
-print("Computing similarity scores...")
-df_scores = df_queries_sample.crossJoin(df_docs) \
-    .withColumn("similarity", dot_product(col("query_vec"), col("doc_vec")))
+print("Computing similarity scores (brute-force)...")
+
+df_scores = df_queries_sample.crossJoin(
+    broadcast(df_docs)
+).withColumn(
+    "similarity",
+    dot_product(col("query_vec"), col("doc_vec"))
+)
 
 # ==========================================
 # 5. Top-10 Retrieval
@@ -73,7 +78,7 @@ df_top_k = df_scores \
     .filter(col("rank") <= 10) \
     .select("query_id", "doc_id", "similarity", "rank")
 
-print("Top-10 retrieval done")
+print("Top-10 retrieval completed")
 
 # ==========================================
 # 6. Evaluation – Precision@10
@@ -84,8 +89,8 @@ df_eval = df_top_k.join(
     how="left"
 ).withColumn(
     "is_relevant",
-    F.when(col("score") > 0, 1).otherwise(0)
-).fillna(0, subset=["is_relevant"])
+    F.when(col("score").isNotNull(), 1).otherwise(0)
+)
 
 df_metrics = df_eval.groupBy("query_id") \
     .agg(
@@ -102,7 +107,7 @@ avg_precision = df_metrics.agg(
 
 print("=" * 60)
 print("EVALUATION RESULT (Sample 100 Queries)")
-print(f"Mean Precision@10: {avg_precision}")
+print(f"Mean Precision@10 (P@10): {avg_precision}")
 print("=" * 60)
 
 # ==========================================

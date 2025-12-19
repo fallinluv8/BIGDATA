@@ -1,113 +1,133 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, pandas_udf
-from pyspark.sql.types import StringType
-
-import pandas as pd
-from transformers import TrOCRProcessor, VisionEncoderDecoderModel
+from pyspark.sql import SparkSession, Row
+from pyspark.sql.types import StructType, StructField, StringType
 from PIL import Image
-import io
-import torch
+import io, re
 
-# ==========================================
-# GLOBAL MODEL (LOAD 1 LẦN / EXECUTOR)
-# ==========================================
-processor = None
-model = None
-DEVICE = "cpu"
-MODEL_NAME = "microsoft/trocr-small-printed"
+# =====================================================
+# CONFIG
+# =====================================================
+MAX_TEXT_LEN = 800
+MIN_W = 300
+MIN_H = 300
+MAX_IMG_SIZE = 1000   # ⬅ resize để nhẹ
 
-# ==========================================
-# 1. Spark Session
-# ==========================================
+
+# 1) Spark
+
 spark = SparkSession.builder \
-    .appName("MED-ETL-ViDoRe-Step5-OCR-TrOCR") \
+    .appName("MED-ETL-ViDoRe-Step5-OCR-PaddleOCR") \
     .master("spark://med-spark-master:7077") \
     .config("spark.hadoop.fs.defaultFS", "hdfs://med-namenode:9000") \
-    .config("spark.driver.host", "med-spark-client") \
     .config("spark.executor.memory", "2g") \
-    .config("spark.task.cpus", "2") \
+    .config("spark.executor.cores", "1") \
+    .config("spark.task.cpus", "1") \
     .getOrCreate()
 
+spark.sparkContext.setLogLevel("WARN")
 print("SparkSession created")
 
-# ==========================================
-# 2. Read ViDoRe data
-# ==========================================
-input_path = "hdfs:///bigdata/vidore/english-corpus/*.parquet"
+#  Accumulator
+ocr_counter = spark.sparkContext.accumulator(0)
 
-df = spark.read.parquet(input_path)
-print("Read ViDoRe parquet successfully")
-df.printSchema()
 
-df_select = df.select(
-    col("id").alias("doc_id"),
-    col("image.bytes").alias("image_bytes")
-)
+# 2) Read parquet 
 
-# ==========================================
-# 3. OCR Pandas UDF (FIXED)
-# ==========================================
-@pandas_udf(StringType())
-def ocr_trocr_udf(image_bytes_series: pd.Series) -> pd.Series:
-    global processor, model
+df = spark.read.parquet(
+    "hdfs:///bigdata/vidore/english-corpus/*.parquet"
+).select(
+    "id", "image.bytes"
+).withColumnRenamed(
+    "id", "doc_id"
+).withColumnRenamed(
+    "bytes", "image_bytes"
+).limit(300)   # giới hạn ẢNH tránh quá nặng
 
-    # ---- LOAD MODEL 1 LẦN / EXECUTOR ----
-    if processor is None or model is None:
-        processor = TrOCRProcessor.from_pretrained(MODEL_NAME)
-        model = VisionEncoderDecoderModel.from_pretrained(
-            MODEL_NAME
-        ).to(DEVICE)
-        model.eval()
+total_images = df.count()
+print(f"Total images to OCR (TEST): {total_images}")
 
-    results = []
+# 3) Clean text 
+def clean_text(text):
+    if not text:
+        return ""
+    t = re.sub(r"\s+", " ", text.strip())
+    if len(t) < 10:
+        return ""
+    return t[:MAX_TEXT_LEN]
 
-    for img_bytes in image_bytes_series:
+# 4) OCR partition (LOAD MODEL 1 LẦN / EXECUTOR)
+
+def ocr_partition(rows):
+    from paddleocr import PaddleOCR
+    import numpy as np
+    from PIL import Image
+    import io
+
+    #  LOAD ĐÚNG THEO YÊU CẦU
+    ocr = PaddleOCR(lang="en")
+
+    for row in rows:
         try:
-            if img_bytes is None:
-                results.append("")
+            if not row.image_bytes:
+                ocr_counter.add(1)
+                yield Row(doc_id=row.doc_id, text_ocr="")
                 continue
 
-            image = Image.open(io.BytesIO(img_bytes)).convert("RGB")
-            pixel_values = processor(
-                images=image, return_tensors="pt"
-            ).pixel_values.to(DEVICE)
+            img = Image.open(io.BytesIO(row.image_bytes)).convert("RGB")
 
-            with torch.no_grad():
-                generated_ids = model.generate(
-                    pixel_values, max_new_tokens=128
-                )
+            if img.width < MIN_W or img.height < MIN_H:
+                ocr_counter.add(1)
+                yield Row(doc_id=row.doc_id, text_ocr="")
+                continue
 
-            text = processor.batch_decode(
-                generated_ids, skip_special_tokens=True
-            )[0]
+            # =============================
+            # RESIZE ẢNH ĐỂ NHẸ
+            # =============================
+            w, h = img.size
+            scale = min(MAX_IMG_SIZE / max(w, h), 1.0)
+            img = img.resize((int(w * scale), int(h * scale)))
 
-            results.append(text)
+            # =============================
+            # OCR
+            # =============================
+            result = ocr.predict(np.array(img))
 
-        except Exception:
-            results.append("")
+            texts = []
+            if result and "rec_texts" in result[0]:
+                texts = result[0]["rec_texts"]
 
-    return pd.Series(results)
+            final_text = clean_text(" ".join(texts))
 
-# ==========================================
-# 4. Distributed OCR
-# ==========================================
-df_repart = df_select.repartition(8)
+            ocr_counter.add(1)
+            yield Row(doc_id=row.doc_id, text_ocr=final_text)
+
+        except Exception as e:
+            ocr_counter.add(1)
+            yield Row(doc_id=row.doc_id, text_ocr="")
+
+
+# 5) RUN OCR (1 PARTITION CHO NHẸ)
+
+df = df.repartition(1)
 
 print("Starting OCR processing...")
-df_ocr = df_repart.withColumn(
-    "text_ocr", ocr_trocr_udf(col("image_bytes"))
-)
 
-# ==========================================
-# 5. Save to HDFS
-# ==========================================
-output_path = "hdfs:///bigdata/processed/vidore_ocr"
+rdd_ocr = df.rdd.mapPartitions(ocr_partition)
 
-df_ocr.select("doc_id", "text_ocr") \
-    .write \
-    .mode("overwrite") \
-    .parquet(output_path)
+schema = StructType([
+    StructField("doc_id", StringType(), True),
+    StructField("text_ocr", StringType(), True)
+])
 
-print(f"OCR finished. Data written to {output_path}")
+df_ocr = spark.createDataFrame(rdd_ocr, schema)
+
+# =====================================================
+# 6) SAVE
+# =====================================================
+df_ocr.coalesce(1) \
+    .write.mode("overwrite") \
+    .parquet("hdfs:///bigdata/processed/vidore_ocr")
+
+print("OCR finished successfully")
+print(f"TOTAL OCR PROCESSED: {ocr_counter.value} / {total_images}")
 
 spark.stop()

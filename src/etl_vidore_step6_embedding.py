@@ -7,16 +7,19 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModel
 
-# ==========================================
+
 # GLOBAL MODEL (LOAD 1 LẦN / EXECUTOR)
-# ==========================================
+
 tokenizer = None
 model = None
+
 DEVICE = "cpu"
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+MAX_CHARS = 512      # CẮT TEXT OCR SỚM
+MAX_TOKENS = 128
 
 # ==========================================
-# 1. Khởi tạo Spark Session
+# 1. Spark Session
 # ==========================================
 spark = SparkSession.builder \
     .appName("MED-ETL-ViDoRe-Step6-Embedding") \
@@ -24,13 +27,14 @@ spark = SparkSession.builder \
     .config("spark.hadoop.fs.defaultFS", "hdfs://med-namenode:9000") \
     .config("spark.driver.host", "med-spark-client") \
     .config("spark.executor.memory", "2g") \
-    .config("spark.task.cpus", "2") \
+    .config("spark.task.cpus", "1") \
     .getOrCreate()
 
+spark.sparkContext.setLogLevel("WARN")
 print("SparkSession created")
 
 # ==========================================
-# 2. Đọc dữ liệu (OCR + Queries)
+# 2. Load data
 # ==========================================
 df_docs = spark.read.parquet(
     "hdfs:///bigdata/processed/vidore_ocr"
@@ -52,78 +56,82 @@ print("Data loaded successfully")
 # 3. Mean Pooling
 # ==========================================
 def mean_pooling(model_output, attention_mask):
-    token_embeddings = model_output[0]
+    token_embeddings = model_output.last_hidden_state
     input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
     return torch.sum(token_embeddings * input_mask_expanded, 1) / \
            torch.clamp(input_mask_expanded.sum(1), min=1e-9)
 
 # ==========================================
-# 4. Pandas UDF Embedding (FIXED)
+# 4. Pandas UDF Embedding (OPTIMIZED)
 # ==========================================
 @pandas_udf(ArrayType(FloatType()))
 def embedding_udf(text_series: pd.Series) -> pd.Series:
     global tokenizer, model
 
-    # ---- LOAD MODEL 1 LẦN / EXECUTOR ----
     if tokenizer is None or model is None:
         tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         model = AutoModel.from_pretrained(MODEL_NAME).to(DEVICE)
         model.eval()
 
-    results = []
+    texts = []
+    valid_idx = []
 
-    for text in text_series:
-        try:
-            if not text or not str(text).strip():
-                results.append(None)
-                continue
+    # ---- PRE-CLEAN & CUT TEXT ----
+    for i, text in enumerate(text_series):
+        if text and str(text).strip():
+            texts.append(str(text)[:MAX_CHARS])
+            valid_idx.append(i)
+        else:
+            texts.append(None)
 
-            encoded = tokenizer(
-                text,
-                padding=True,
-                truncation=True,
-                max_length=128,
-                return_tensors="pt"
-            ).to(DEVICE)
+    results = [None] * len(text_series)
 
-            with torch.no_grad():
-                output = model(**encoded)
+    if not valid_idx:
+        return pd.Series(results)
 
-            emb = mean_pooling(output, encoded["attention_mask"])
-            emb = F.normalize(emb, p=2, dim=1)
+    # ---- BATCH TOKENIZE ----
+    encoded = tokenizer(
+        [texts[i] for i in valid_idx],
+        padding=True,
+        truncation=True,
+        max_length=MAX_TOKENS,
+        return_tensors="pt"
+    ).to(DEVICE)
 
-            results.append(emb[0].cpu().tolist())
+    with torch.no_grad():
+        output = model(**encoded)
 
-        except Exception:
-            results.append(None)
+    embeddings = mean_pooling(output, encoded["attention_mask"])
+    embeddings = F.normalize(embeddings, p=2, dim=1)
+
+    for idx, emb in zip(valid_idx, embeddings):
+        results[idx] = emb.cpu().numpy().astype("float32").tolist()
 
     return pd.Series(results)
 
 # ==========================================
-# 5. Thực thi Embedding
+# 5. Run Embedding
 # ==========================================
 print("Embedding Documents...")
-df_docs_repart = df_docs.repartition(4)
-df_doc_emb = df_docs_repart.withColumn(
-    "embedding", embedding_udf(col("text_content"))
-).filter(col("embedding").isNotNull())
+df_doc_emb = df_docs.repartition(4) \
+    .withColumn("embedding", embedding_udf(col("text_content"))) \
+    .filter(col("embedding").isNotNull())
 
 print("Embedding Queries...")
-df_queries_repart = df_queries.repartition(2)
-df_query_emb = df_queries_repart.withColumn(
-    "embedding", embedding_udf(col("text_content"))
-).filter(col("embedding").isNotNull())
+df_query_emb = df_queries.repartition(2) \
+    .withColumn("embedding", embedding_udf(col("text_content"))) \
+    .filter(col("embedding").isNotNull())
 
 # ==========================================
-# 6. Lưu kết quả
+# 6. Save
 # ==========================================
-df_doc_emb.write \
+df_doc_emb.coalesce(2).write \
     .mode("overwrite") \
     .parquet("hdfs:///bigdata/processed/vidore_doc_embeddings")
 
 print("Saved Document Embeddings")
 
-df_query_emb.write \
+df_query_emb.coalesce(1).write \
     .mode("overwrite") \
     .parquet("hdfs:///bigdata/processed/vidore_query_embeddings")
 
